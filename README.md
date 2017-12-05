@@ -1,5 +1,5 @@
-# parse_diamond
-A simple python script to parse DIAMOND results in to a count table. Uses pandas to create the data frame.  
+# parse_diamond.py
+A simple python script to parse DIAMOND results in to a count table. Works in python2 and uses pandas to create the data frame.  
 
 Might be stupid, so use at your own risk.  
 
