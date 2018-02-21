@@ -10,5 +10,5 @@ In the paired-end version, R1 and R2 reads are annotated separately. The script 
 Usage:
 ```
 python parse_diamond.py -i DIAMOND_OUTPUT -o COUNT_TABLE
-python parse_diamondPE.py -1 R1_RES -2 R2_RES -o COUNT_TABLE
+python parse_diamondPE.py -1 R1_OUTPUT -2 R2_OUTPUT -o COUNT_TABLE
 ```
