@@ -1,4 +1,4 @@
-# parse_diamond.py
+# parse_diamond
 A simple python script to parse DIAMOND blast output into a count table. Works in python2 and uses pandas to create the data frame.  
 
 The fasta headers have to start with the sample name and be separated with `-`.  
