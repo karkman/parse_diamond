@@ -17,7 +17,8 @@ parser = argparse.ArgumentParser(description='Parse Diamond R1 & R2 blast output
 parser.add_argument('-1','--reads1',  help='Diamond output for R1 reads')
 parser.add_argument('-2', '--reads2', help='Diamond output for R2 reads')
 parser.add_argument('-o', '--outfile', default='diamond_table.csv', help='Count table')
-									    
+parser.add.argument('-d' '--delimiter', default='-', help='Delimiter between the sample name and the sequence header (default "-")')
+
 args = parser.parse_args()
 
 #check that there is no temp_file already present
@@ -27,6 +28,7 @@ if os.path.isfile("temp_file"):
 
 INFILE1 = open(args.reads1, 'r')
 TEMP = open("temp_file", 'w')
+DELIM = args.delimiter
 
 R1_results = []
 
@@ -60,7 +62,7 @@ INFILE1 = open("temp_file", 'r')
 for line in INFILE1:
 	line = line.rstrip()
 	line = line.split("\t")
-	sample_names.append(line[0].split("-")[0])
+	sample_names.append(line[0].split(DELIM)[0])
 	genes.append(line[1])
 
 cols = set(sample_names)
@@ -77,7 +79,7 @@ INFILE1 = open("temp_file", 'r')
 for line in INFILE1:
 	 line = line.rstrip()
 	 line = line.split("\t")
-	 sample = line[0].split("-")[0]
+	 sample = line[0].split(DELIM)[0]
 	 gene = line[1]
 	 df[sample][gene] = df[sample][gene]+1
 

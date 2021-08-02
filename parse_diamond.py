@@ -8,12 +8,12 @@ import pandas as pd
 parser = argparse.ArgumentParser(description='Parse Diamond blast output to a count table in CSV format')
 parser.add_argument('-i','--infile',  help='Input file from diamond')
 parser.add_argument('-o', '--outfile', default='diamond_table.csv', help='Count table')
-parser.add.argument('-d' '--delimiter', default='-', help='Delimiter between the sample name and the sequence header (default "-")'
+parser.add.argument('-d' '--delimiter', default='-', help='Delimiter between the sample name and the sequence header (default "-")')
 									    
 args = parser.parse_args()
 
 INFILE = open(args.infile, 'r')
-DELIMIT = args.delimiter
+DELIM = args.delimiter
 
 sample_names = []
 genes = []
@@ -38,7 +38,7 @@ INFILE = open(args.infile, 'r')
 for line in INFILE:
 	 line = line.rstrip()
 	 line = line.split("\t")
-	 sample = line[0].split(DELIMIT)[0]
+	 sample = line[0].split(DELIM)[0]
 	 gene = line[1]
 	 df[sample][gene] = df[sample][gene]+1
 
