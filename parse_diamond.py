@@ -29,7 +29,7 @@ rows = set(genes)
 
 df = pd.DataFrame(index=rows,columns=cols)
 df[:] = 0
-print("Matrix created, starting annotation...")
+#print("Matrix created, starting annotation...")
 
 INFILE.close()
 INFILE = open(args.infile, 'r')
@@ -45,5 +45,5 @@ for line in INFILE:
 
 INFILE.close()
 
-print("Annotation done, writing outfile...")
+#print("Annotation done, writing outfile...")
 df.to_csv(args.outfile, sep=";")
