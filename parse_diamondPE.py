@@ -33,9 +33,9 @@ DELIM = args.delimiter
 R1_results = []
 
 for line in INFILE1:
-	line = line.rstrip()
-	R1_results.append(line.split("\t")[0])
-	TEMP.write(line+"\n")
+    line = line.rstrip()
+    R1_results.append(line.split("\t")[0])
+    TEMP.write(line+"\n")
 
 
 INFILE1.close()
@@ -45,12 +45,13 @@ INFILE2 = open(args.reads2, 'r')
 TEMP = open("temp_file", 'a')
 
 for line in INFILE2:
-	line = line.rstrip()
-	sequence = line.split("\t")[0]
-	if sequence in R1_results:
-		next
-	else:
-		TEMP.write(line+"\n")
+    line = line.rstrip()
+    sequence = line.split("\t")[0]
+    if sequence in R1_results:
+        next
+    else:
+        TEMP.write(line+"\n")
+
 TEMP.close()
 INFILE2.close()
 
@@ -60,10 +61,10 @@ genes = []
 INFILE1 = open("temp_file", 'r')
 
 for line in INFILE1:
-	line = line.rstrip()
-	line = line.split("\t")
-	sample_names.append(line[0].split(DELIM)[0])
-	genes.append(line[1])
+    line = line.rstrip()
+    line = line.split("\t")
+    sample_names.append(line[0].split(DELIM)[0])
+    genes.append(line[1])
 
 cols = set(sample_names)
 rows = set(genes)
@@ -77,11 +78,13 @@ INFILE1.close()
 INFILE1 = open("temp_file", 'r')
 
 for line in INFILE1:
-	 line = line.rstrip()
-	 line = line.split("\t")
-	 sample = line[0].split(DELIM)[0]
-	 gene = line[1]
-	 df[sample][gene] = df[sample][gene]+1
+    line = line.rstrip()
+    line = line.split("\t")
+    sample = line[0].split(DELIM)[0]
+    gene = line[1]
+    old_count = df._get_value(gene, sample)
+    new_count = old_count+1
+    df._set_value(gene, sample, new_count)
 
 INFILE1.close()
 print "removing temp file"

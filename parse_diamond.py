@@ -32,7 +32,6 @@ df[:] = 0
 print("Matrix created, starting annotation...")
 
 INFILE.close()
-
 INFILE = open(args.infile, 'r')
 
 for line in INFILE:
@@ -40,7 +39,9 @@ for line in INFILE:
     line = line.split("\t")
     sample = line[0].split(DELIM)[0]
     gene = line[1]
-    df[sample][gene] = df[sample][gene]+1
+    old_count = df._get_value(gene, sample)
+    new_count = old_count+1
+    df._set_value(gene, sample, new_count)
 
 INFILE.close()
 
