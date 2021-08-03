@@ -19,10 +19,10 @@ sample_names = []
 genes = []
 
 for line in INFILE:
-	line = line.rstrip()
-	line = line.split("\t")
-	sample_names.append(line[0].split(DELIM)[0])
-	genes.append(line[1])
+    line = line.rstrip()
+    line = line.split("\t")
+    sample_names.append(line[0].split(DELIM)[0])
+    genes.append(line[1])
 
 cols = set(sample_names)
 rows = set(genes)
@@ -36,11 +36,11 @@ INFILE.close()
 INFILE = open(args.infile, 'r')
 
 for line in INFILE:
-	 line = line.rstrip()
-	 line = line.split("\t")
-	 sample = line[0].split(DELIM)[0]
-	 gene = line[1]
-	 df[sample][gene] = df[sample][gene]+1
+    line = line.rstrip()
+    line = line.split("\t")
+    sample = line[0].split(DELIM)[0]
+    gene = line[1]
+    df[sample][gene] = df[sample][gene]+1
 
 INFILE.close()
 
