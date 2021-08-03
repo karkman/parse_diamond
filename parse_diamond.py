@@ -47,3 +47,4 @@ INFILE.close()
 
 #print("Annotation done, writing outfile...")
 df.to_csv(args.outfile, sep=";")
+
