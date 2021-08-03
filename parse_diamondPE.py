@@ -26,45 +26,48 @@ if os.path.isfile("temp_file"):
 	raise Exception("temp_file exists, you might want to rename it")
 
 
-INFILE1 = open(args.reads1, 'r')
+INFILE1 = args.reads1
 TEMP = open("temp_file", 'w')
 DELIM = args.delimiter
 
 R1_results = []
 
-for line in INFILE1:
-    line = line.rstrip()
-    R1_results.append(line.split("\t")[0])
-    TEMP.write(line+"\n")
-
-
-INFILE1.close()
-TEMP.close()
-
-INFILE2 = open(args.reads2, 'r')
-TEMP = open("temp_file", 'a')
-
-for line in INFILE2:
-    line = line.rstrip()
-    sequence = line.split("\t")[0]
-    if sequence in R1_results:
-        next
-    else:
+with open(INFILE1, "r") as infile:
+    for line in infile:
+        line = line.rstrip()
+        R1_results.append(line.split("\t")[0])
         TEMP.write(line+"\n")
 
+
+#INFILE1.close()
 TEMP.close()
-INFILE2.close()
+
+INFILE2 = args.reads2
+TEMP = open("temp_file", 'a')
+
+with open(INFILE2, "r") as infile:
+    for line in infile:
+        line = line.rstrip()
+        sequence = line.split("\t")[0]
+        if sequence in R1_results:
+            next
+        else:
+            TEMP.write(line+"\n")
+
+TEMP.close()
+#INFILE2.close()
 
 sample_names = []
 genes = []
 
 INFILE1 = open("temp_file", 'r')
 
-for line in INFILE1:
-    line = line.rstrip()
-    line = line.split("\t")
-    sample_names.append(line[0].split(DELIM)[0])
-    genes.append(line[1])
+with open("temp_file", "r") as infile:
+    for line in infile:
+        line = line.rstrip()
+        line = line.split("\t")
+        sample_names.append(line[0].split(DELIM)[0])
+        genes.append(line[1])
 
 cols = set(sample_names)
 rows = set(genes)
@@ -73,20 +76,19 @@ df = pd.DataFrame(index=rows,columns=cols)
 df[:] = 0
 print "Matrix created, starting annotation..."
 
-INFILE1.close()
+#INFILE1.close()
 
-INFILE1 = open("temp_file", 'r')
+with open("temp_file", "r") as infile:
+    for line in infile:
+        line = line.rstrip()
+        line = line.split("\t")
+        sample = line[0].split(DELIM)[0]
+        gene = line[1]
+        old_count = df._get_value(gene, sample)
+        new_count = old_count+1
+        df._set_value(gene, sample, new_count)
 
-for line in INFILE1:
-    line = line.rstrip()
-    line = line.split("\t")
-    sample = line[0].split(DELIM)[0]
-    gene = line[1]
-    old_count = df._get_value(gene, sample)
-    new_count = old_count+1
-    df._set_value(gene, sample, new_count)
-
-INFILE1.close()
+#INFILE1.close()
 print "removing temp file"
 os.system("rm temp_file")
 

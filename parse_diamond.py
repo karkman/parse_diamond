@@ -12,39 +12,41 @@ parser.add_argument('-d', '--delimiter', default='-', help='Delimiter between th
 									    
 args = parser.parse_args()
 
-INFILE = open(args.infile, 'r')
+INFILE = args.infile
 DELIM = args.delimiter
 
 sample_names = []
 genes = []
 
-for line in INFILE:
-    line = line.rstrip()
-    line = line.split("\t")
-    sample_names.append(line[0].split(DELIM)[0])
-    genes.append(line[1])
+with open(INFILE, "r") as infile:
+    for line in infile:
+        line = line.rstrip()
+        line = line.split("\t")
+        sample_names.append(line[0].split(DELIM)[0])
+        genes.append(line[1])
 
 cols = set(sample_names)
 rows = set(genes)
 
 df = pd.DataFrame(index=rows,columns=cols)
 df[:] = 0
-#print("Matrix created, starting annotation...")
+print("Matrix created, starting annotation...")
 
-INFILE.close()
-INFILE = open(args.infile, 'r')
+#INFILE.close()
+#INFILE = open(args.infile, 'r')
 
-for line in INFILE:
-    line = line.rstrip()
-    line = line.split("\t")
-    sample = line[0].split(DELIM)[0]
-    gene = line[1]
-    old_count = df._get_value(gene, sample)
-    new_count = old_count+1
-    df._set_value(gene, sample, new_count)
+with open(INFILE, "r") as infile:
+    for line in infile:
+        line = line.rstrip()
+        line = line.split("\t")
+        sample = line[0].split(DELIM)[0]
+        gene = line[1]
+        old_count = df._get_value(gene, sample)
+        new_count = old_count+1
+        df._set_value(gene, sample, new_count)
 
-INFILE.close()
+#INFILE.close()
 
-#print("Annotation done, writing outfile...")
+print("Annotation done, writing outfile...")
 df.to_csv(args.outfile, sep=";")
 
