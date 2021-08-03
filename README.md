@@ -1,5 +1,5 @@
 # parse_diamond
-A simple and very slow python script to parse DIAMOND blast output into a count table. Updated to work with python3 and uses pandas to create the data frame.  
+A simple and ~very~ moderately slow python script to parse DIAMOND blast output into a count table. Updated to work with python3 and uses pandas to create the data frame.  
 
 
 The fasta headers have to start with the sample name and be separated with a delimiter, assumes by default `-`.  
