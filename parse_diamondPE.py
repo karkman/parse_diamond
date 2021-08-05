@@ -57,8 +57,8 @@ with open(INFILE2, "r") as infile:
 TEMP.close()
 #INFILE2.close()
 
-sample_names = []
-genes = []
+sample_names = set()
+genes = set()
 
 INFILE1 = open("temp_file", 'r')
 
@@ -66,11 +66,11 @@ with open("temp_file", "r") as infile:
     for line in infile:
         line = line.rstrip()
         line = line.split("\t")
-        sample_names.append(line[0].split(DELIM)[0])
-        genes.append(line[1])
+        sample_names.add(line[0].split(DELIM)[0])
+        genes.add(line[1])
 
-cols = set(sample_names)
-rows = set(genes)
+cols = sorted(sample_names)
+rows = sorted(genes)
 
 df = pd.DataFrame(index=rows,columns=cols)
 df[:] = 0
