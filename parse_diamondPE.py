@@ -17,7 +17,7 @@ parser = argparse.ArgumentParser(description='Parse Diamond R1 & R2 blast output
 parser.add_argument('-1','--reads1',  help='Diamond output for R1 reads')
 parser.add_argument('-2', '--reads2', help='Diamond output for R2 reads')
 parser.add_argument('-o', '--outfile', default='diamond_table.csv', help='Count table')
-parser.add.argument('-d' '--delimiter', default='-', help='Delimiter between the sample name and the sequence header (default "-")')
+parser.add_argument('-d' '--delimiter', default='-', help='Delimiter between the sample name and the sequence header (default "-")')
 
 args = parser.parse_args()
 
