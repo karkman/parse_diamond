@@ -74,7 +74,7 @@ rows = sorted(genes)
 
 df = pd.DataFrame(index=rows,columns=cols)
 df[:] = 0
-print "Matrix created, starting annotation..."
+print("Matrix created, starting annotation...")
 
 #INFILE1.close()
 
@@ -89,8 +89,8 @@ with open("temp_file", "r") as infile:
         df._set_value(gene, sample, new_count)
 
 #INFILE1.close()
-print "removing temp file"
+print("removing temp file")
 os.system("rm temp_file")
 
-print "Annotation done, writing outfile..."
+print("Annotation done, writing outfile...")
 df.to_csv(args.outfile, sep=";")
