@@ -28,7 +28,7 @@ if os.path.isfile("temp_file"):
 
 INFILE1 = args.reads1
 TEMP = open("temp_file", 'w')
-DELIM = args.delimiter
+DELIM = args.d__delimiter
 
 R1_results = []
 
