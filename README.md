@@ -2,7 +2,7 @@
 A simple and ~very~ moderately slow python script to parse DIAMOND blast output into a count table. Updated to work with python3 and uses pandas to create the data frame.  
 
 
-The fasta headers have to start with the sample name before the seqeunce name and be separated with a delimite (by default `-`).  
+The fasta headers have to start with the sample name before the seqeunce name and be separated with some delimiter (by default `-`).  
 `>SAMPLE1-M01457:76:000000000-BDYH7:1:1101:17200:1346`  
 Might work for other blast outputs too, but use at your own risk. 
 
